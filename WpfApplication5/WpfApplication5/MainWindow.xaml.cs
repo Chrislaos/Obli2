@@ -30,10 +30,6 @@ namespace WpfApplication5
         public MainWindow()
         {
             InitializeComponent();
-            
-            
-
-            username[0] = "admin"; password[0] = "fotball";
         }
 
         private void buttonClick(object sender, RoutedEventArgs e)

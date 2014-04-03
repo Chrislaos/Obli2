@@ -13,10 +13,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Timers;
-using System.Threading.Tasks;
 using System.Threading;
 using System.ComponentModel;
 using System.Windows.Threading;
+using System.Collections.ObjectModel;
 
 
 namespace WpfApplication5
@@ -24,7 +24,7 @@ namespace WpfApplication5
     
     public partial class adminWin : UserControl
     {
-        List<User> items = new List<User>();
+        ObservableCollection<User> _userCollection = new ObservableCollection<User>();
 
         public adminWin(MainWindow mainVindu)
         {
@@ -32,8 +32,7 @@ namespace WpfApplication5
             InitializeComponent();
             refreshList();
             
-            items.Add(new User() { Username = "Admin", Passord = "Fotball"});
-            
+            _userCollection.Add(new User{ Username = "admin", Password = "fotball", passExpires = passwordExpires()});
 
             System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
@@ -61,8 +60,16 @@ namespace WpfApplication5
         // Updating listbox window
         public void refreshList()
         {
-            items.Add(new User() { Username = adminUser.Text });
-            listviewReg.ItemsSource = items;
+            _userCollection.Add(new User { Username = adminUser.Text, Password = adminPass.Password, passExpires = passwordExpires() });
+        }
+        public ObservableCollection<User> userCollection
+        {
+            get { return _userCollection; }
+        }
+        public DateTime passwordExpires()
+        {
+            DateTime minutes = DateTime.Now;
+            return minutes.AddMinutes(2);
         }
         // Function for adding user and password
         public bool addRegister(String x, String y)

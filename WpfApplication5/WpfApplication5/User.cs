@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace WpfApplication5
 {
-    class User
+    public class User
     {
-        public string Username;
-        public string Passord;
-        public DateTime passExpires;
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public DateTime passExpires { get; set; }
     }
 }
