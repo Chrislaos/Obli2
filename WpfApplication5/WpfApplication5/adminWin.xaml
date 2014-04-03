@@ -14,7 +14,7 @@
         <Button x:Name="addButton" Content="Add" HorizontalAlignment="Left" Margin="194,11,0,0" VerticalAlignment="Top" Width="75" Click="addButton_Click"/>
         <PasswordBox x:Name="adminPass" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.1,-1.65" Width="179"/>
         <TextBlock x:Name="textClock" HorizontalAlignment="Left" Margin="10,89,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="275" Height="26"><Run Language="nb-no" Text=""/></TextBlock>
-        <TextBlock x:Name="clockBox" HorizontalAlignment="Left" Margin="10,89,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="275" Height="26"><Run Language="nb-no" Text="Time:"/></TextBlock>
+        <TextBlock x:Name="clockBox" HorizontalAlignment="Left" Margin="10,89,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="275" Height="26"/>
 
     </Grid>
 </UserControl>

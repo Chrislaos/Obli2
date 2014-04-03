@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Threading;
 using System.Timers;
-
+using System.ComponentModel;
 
 namespace WpfApplication5
 {
@@ -25,14 +25,12 @@ namespace WpfApplication5
     {
         public static String[] username = new String[10];
         public static String[] password = new String[10];
-        private static System.Timers.Timer aTimer;
-
+        
 
         public MainWindow()
         {
-            Thread clockThread = new Thread(clock);
             InitializeComponent();
-            clockThread.Start();
+            
             
 
             username[0] = "admin"; password[0] = "fotball";
@@ -40,34 +38,34 @@ namespace WpfApplication5
 
         private void buttonClick(object sender, RoutedEventArgs e)
         {
-            if (bruker.Text == "admin" && pass.Password == "fotball")
-            {
-                this.Content = new adminWin(this);
-                    
-            }
-            else
-            {
-               
-            }
+            logging_in();
         }
+        
+        
 
         private void bruker_TextChanged(object sender, TextChangedEventArgs e)
         {
-
-        }
-        
-        public void clock()
-        {
-            aTimer = new System.Timers.Timer(1000);
-            aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
-            aTimer.Enabled = true;
-        }
-        public void OnTimedEvent(object source, ElapsedEventArgs e)
-        {
-            String Text = e.SignalTime.ToString();
-            MessageBox.Show(Text);
             
-            //Text = e.SignalTime.ToString();
+        }
+
+        private void Enter_login(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                logging_in();
+            }
+        }
+        private void logging_in()
+        {
+            if (bruker.Text == "admin" && pass.Password == "fotball")
+            {
+                this.Content = new adminWin(this);
+
+            }
+            else
+            {
+
+            }
         }
     }
 }

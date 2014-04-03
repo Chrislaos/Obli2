@@ -15,24 +15,31 @@ using System.Windows.Shapes;
 using System.Timers;
 using System.Threading.Tasks;
 using System.Threading;
+using System.ComponentModel;
+using System.Windows.Threading;
+
 
 namespace WpfApplication5
 {
-    /// <summary>
-    /// Interaction logic for adminWin.xaml
-    /// </summary>
+    
     public partial class adminWin : UserControl
     {
         
-
         public adminWin(MainWindow mainVindu)
         {
             InitializeComponent();
             refreshList();
             
+            System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+            dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+            dispatcherTimer.Start();
             
         }
-
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            clockBox.Text = DateTime.Now.ToString();
+        }
         private void adminUser_TextChanged(object sender, TextChangedEventArgs e)
         {
             
@@ -76,17 +83,6 @@ namespace WpfApplication5
             return boolCheck;
             
         }
-        //private static System.Timers.Timer aTimer;
-        //private void clock()
-        //{
-        //    aTimer = new System.Timers.Timer(1000);
-        //    aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
-        //    aTimer.Enabled = true;
-        //}
-        //public void OnTimedEvent(object source, ElapsedEventArgs e)
-        //{
-        //    clockBox.Text = e.SignalTime.ToString();
-        //}
         private void listViewBrukere_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             
