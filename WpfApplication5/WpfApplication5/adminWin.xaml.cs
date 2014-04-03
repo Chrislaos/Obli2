@@ -24,12 +24,17 @@ namespace WpfApplication5
     
     public partial class adminWin : UserControl
     {
-        
+        List<User> items = new List<User>();
+
         public adminWin(MainWindow mainVindu)
         {
+            
             InitializeComponent();
             refreshList();
             
+            items.Add(new User() { Username = "Admin", Passord = "Fotball"});
+            
+
             System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
@@ -56,11 +61,9 @@ namespace WpfApplication5
         // Updating listbox window
         public void refreshList()
         {
-            listboxRegister.Items.Clear();
-            foreach (String n in MainWindow.username) { listboxRegister.Items.Add(n); }
-
+            items.Add(new User() { Username = adminUser.Text });
+            listviewReg.ItemsSource = items;
         }
-        
         // Function for adding user and password
         public bool addRegister(String x, String y)
         {

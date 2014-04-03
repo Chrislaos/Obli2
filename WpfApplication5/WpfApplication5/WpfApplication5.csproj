@@ -57,6 +57,7 @@
     <Compile Include="adminWin.xaml.cs">
       <DependentUpon>adminWin.xaml</DependentUpon>
     </Compile>
+    <Compile Include="User.cs" />
     <Page Include="adminWin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
