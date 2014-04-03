@@ -1,0 +1,13 @@
+﻿<Window x:Class="WpfApplication5.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Button Content="Login" HorizontalAlignment="Left" Margin="247,10,0,0" VerticalAlignment="Top" Width="75" Click="buttonClick"/>
+        <TextBox x:Name="bruker" HorizontalAlignment="Left" Height="23" Margin="86,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="156" TextChanged="bruker_TextChanged"/>
+        <PasswordBox x:Name="pass" HorizontalAlignment="Left" Margin="86,39,0,0" VerticalAlignment="Top" Width="156"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="22" Width="76" FontSize="15"><Run Language="nb-no" Text="Username:"/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Margin="10,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="22" Width="76" FontSize="15"><Run Language="nb-no" Text="Password:"/></TextBlock>
+
+    </Grid>
+</Window>
