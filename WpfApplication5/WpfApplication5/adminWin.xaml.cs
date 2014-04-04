@@ -51,11 +51,8 @@ namespace WpfApplication5
         // Testing if possible while adding user and password to list through button click.
         private void addButton_Click(object sender, RoutedEventArgs e)
         {
-            
-            bool test1 = addRegister(adminUser.Text, adminPass.Password);
             refreshList();
-            if (test1) { adminUser.Text = "Success"; }
-            else { adminUser.Text = "Unable"; }
+            
         }
         // Updating listbox window
         public void refreshList()
@@ -72,31 +69,31 @@ namespace WpfApplication5
             return minutes.AddMinutes(2);
         }
         // Function for adding user and password
-        public bool addRegister(String x, String y)
-        {
-            bool boolCheck = true;
-            for (int i = 1; i < 10; i++)
-            {
+        //public bool addRegister(String x, String y)
+        //{
+        //    bool boolCheck = true;
+        //    for (int i = 1; i < 10; i++)
+        //    {
 
-                if (MainWindow.username[i] == null)
-                {
-                    MainWindow.username[i] = x;
-                    MainWindow.password[i] = y;
-                    i = 10;
-                    boolCheck = true;
-                }
-                else
-                {
-                    boolCheck = false;
-                }
-            }
-            return boolCheck;
+        //        if (MainWindow.username[i] == null)
+        //        {
+        //            MainWindow.username[i] = x;
+        //            MainWindow.password[i] = y;
+        //            i = 10;
+        //            boolCheck = true;
+        //        }
+        //        else
+        //        {
+        //            boolCheck = false;
+        //        }
+        //    }
+        //    return boolCheck;
             
-        }
-        private void listViewBrukere_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
+        //}
+        //private void listViewBrukere_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
             
-        }
+        //}
 
     }
 }
