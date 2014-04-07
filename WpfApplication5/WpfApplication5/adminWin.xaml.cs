@@ -20,6 +20,8 @@ using System.Collections.ObjectModel;
 
 
 
+
+
 namespace WpfApplication5
 {
     
@@ -27,6 +29,7 @@ namespace WpfApplication5
     {
         private Panel tempPanel;
         static public ObservableCollection<User> _userCollection = new ObservableCollection<User>();
+        
         
 
         public adminWin(Grid thePanel)
@@ -46,7 +49,6 @@ namespace WpfApplication5
             clockBox.Text = DateTime.Now.ToString();
             checkForExpired();
             refreshList();
-            
         }
         private void removeUser()
         {
@@ -111,6 +113,13 @@ namespace WpfApplication5
             _userCollection[listviewReg.SelectedIndex].passExpires = passwordExpires();
             _userCollection[listviewReg.SelectedIndex].passExpired = false;
         }
+
+        private void GridViewColumnHeader_Click(object sender, RoutedEventArgs e)
+        {
+            _userCollection = new ObservableCollection<User>(_userCollection.OrderBy(a => a.Username));
+            refreshList();
+        }
+
 
     }
 }
