@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Threading;
 using System.Timers;
 using System.ComponentModel;
+using System.Collections.ObjectModel;
 
 namespace WpfApplication5
 {
@@ -23,21 +24,24 @@ namespace WpfApplication5
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static String[] username = new String[10];
-        public static String[] password = new String[10];
         
-
+        public bool passExpired = false;
+        
         public MainWindow()
         {
             InitializeComponent();
+            adminWin._userCollection.Add(new User { Username = "admin", Password = "fotball", passExpires = adminWin.passwordExpires() });
         }
-
+        public void SwitchControls(Control removeCtrl, Control addControl)
+        {
+           
+        }
         private void buttonClick(object sender, RoutedEventArgs e)
         {
             logging_in();
         }
-        
-        
+
+
 
         private void bruker_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -53,15 +57,48 @@ namespace WpfApplication5
         }
         private void logging_in()
         {
-            if (bruker.Text == "admin" && pass.Password == "fotball")
-            {
-                this.Content = new adminWin(this);
 
+            if (User.Text == "admin" && Password.Password == "fotball")
+            {
+                
+                adminWin AdminWindow = new adminWin(Panel1);
+                Panel1.Children.Add(AdminWindow);
+
+            }
+            else if(checkUser()){
+                MessageBox.Show("YIPIKAYEY");
             }
             else
             {
-
+                MessageBox.Show("SHIT");
             }
+            clearBoxes();
         }
+        private void clearBoxes(){
+            User.Text = null;
+            Password.Password = null;
+        }
+
+        public bool checkUser()
+        {
+            bool tempBool = false;
+            foreach (User user in adminWin._userCollection)
+            {
+
+                if (user.Username == User.Text)
+                {
+                    if (user.Password == Password.Password) { 
+                        tempBool = true;
+                        if (user.passExpired) { }
+                        else
+                        {
+
+                        }
+                    }
+                }
+            }
+            return tempBool;
+        }
+        
     }
 }

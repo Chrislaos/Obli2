@@ -19,20 +19,21 @@ using System.Windows.Threading;
 using System.Collections.ObjectModel;
 
 
+
 namespace WpfApplication5
 {
     
     public partial class adminWin : UserControl
     {
-        ObservableCollection<User> _userCollection = new ObservableCollection<User>();
+        private Panel tempPanel;
+        static public ObservableCollection<User> _userCollection = new ObservableCollection<User>();
+        
 
-        public adminWin(MainWindow mainVindu)
+        public adminWin(Grid thePanel)
         {
             
+            tempPanel = thePanel;
             InitializeComponent();
-            refreshList();
-            
-            _userCollection.Add(new User{ Username = "admin", Password = "fotball", passExpires = passwordExpires()});
 
             System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
@@ -43,57 +44,73 @@ namespace WpfApplication5
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
             clockBox.Text = DateTime.Now.ToString();
-        }
-        private void adminUser_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            
-        }
-        // Testing if possible while adding user and password to list through button click.
-        private void addButton_Click(object sender, RoutedEventArgs e)
-        {
+            checkForExpired();
             refreshList();
             
         }
-        // Updating listbox window
-        public void refreshList()
+        private void removeUser()
         {
+            _userCollection.RemoveAt(listviewReg.SelectedIndex);
+            adminUser.Text = listviewReg.SelectedIndex.ToString();
+        }
+        private void addButton_Click(object sender, RoutedEventArgs e)
+        {
+            addUser();
+        }
+
+        private void refreshList()
+        {
+            listviewReg.Items.Refresh();
+        }
+        public void addUser()
+        {
+            refreshList();
             _userCollection.Add(new User { Username = adminUser.Text, Password = adminPass.Password, passExpires = passwordExpires() });
         }
         public ObservableCollection<User> userCollection
         {
             get { return _userCollection; }
         }
-        public DateTime passwordExpires()
+        static public DateTime passwordExpires()
         {
             DateTime minutes = DateTime.Now;
-            return minutes.AddMinutes(2);
+            return minutes.AddSeconds(10);
         }
-        // Function for adding user and password
-        //public bool addRegister(String x, String y)
-        //{
-        //    bool boolCheck = true;
-        //    for (int i = 1; i < 10; i++)
-        //    {
+        public UserControl ParentControl;
 
-        //        if (MainWindow.username[i] == null)
-        //        {
-        //            MainWindow.username[i] = x;
-        //            MainWindow.password[i] = y;
-        //            i = 10;
-        //            boolCheck = true;
-        //        }
-        //        else
-        //        {
-        //            boolCheck = false;
-        //        }
-        //    }
-        //    return boolCheck;
-            
-        //}
-        //private void listViewBrukere_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-            
-        //}
+        
+        private void Logout_Click_Click(object sender, RoutedEventArgs e)
+        {
+            tempPanel.Children.Remove(this);
+        }
+        private void checkForExpired()
+        {
+            foreach (User user in adminWin._userCollection)
+            {
+
+                if (user.passExpires < DateTime.Now) { user.passExpired = true; }
+            }
+        }
+        private void adminUser_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void Delete_button_Click(object sender, RoutedEventArgs e)
+        {
+            removeUser();
+        }
+
+        private void Reset_Click(object sender, RoutedEventArgs e)
+        {
+            Reset_password();
+        }
+        private void Reset_password()
+        {
+            _userCollection[listviewReg.SelectedIndex].Password = reset_box.Password;
+            _userCollection[listviewReg.SelectedIndex].passExpires = passwordExpires();
+            _userCollection[listviewReg.SelectedIndex].passExpired = false;
+        }
 
     }
 }

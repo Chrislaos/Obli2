@@ -5,25 +5,32 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              DataContext="{Binding RelativeSource={RelativeSource Self}}"
              mc:Ignorable="d" Width="516" Height="340">
-    <Grid Margin="0,0,10,10">
+    <Grid Background="White" Margin="0,0,10,10">
         <Grid.RowDefinitions>
             <RowDefinition Height="41*"/>
             <RowDefinition Height="25*"/>
         </Grid.RowDefinitions>
-        <TextBox x:Name="adminUser" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="179" TextChanged="adminUser_TextChanged"/>
-        <Button x:Name="addButton" Content="Add" HorizontalAlignment="Left" Margin="194,11,0,0" VerticalAlignment="Top" Width="75" Click="addButton_Click"/>
-        <PasswordBox x:Name="adminPass" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.1,-1.65" Width="179"/>
+        <TextBox x:Name="adminUser" HorizontalAlignment="Left" Height="23" Margin="104,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="179" TextChanged="adminUser_TextChanged"/>
+        <Button x:Name="addButton" Content="Add" HorizontalAlignment="Left" Margin="288,11,0,0" VerticalAlignment="Top" Width="75" Click="addButton_Click"/>
+        <PasswordBox x:Name="adminPass" HorizontalAlignment="Left" Margin="104,38,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.1,-1.65" Width="179"/>
         <TextBlock x:Name="textClock" HorizontalAlignment="Left" Margin="10,89,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="275" Height="26"><Run Language="nb-no" Text=""/></TextBlock>
         <TextBlock x:Name="clockBox" HorizontalAlignment="Left" Margin="10,89,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="275" Height="26"/>
-        <ListView x:Name="listviewReg" HorizontalAlignment="Left" Height="235" Margin="66,74,0,0" VerticalAlignment="Top" Width="371" Grid.RowSpan="2" ItemsSource="{Binding userCollection}">
+        <ListView x:Name="listviewReg" HorizontalAlignment="Left" Height="202" Margin="30,65,0,0" VerticalAlignment="Top" Width="363" Grid.RowSpan="2" ItemsSource="{Binding userCollection}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="User" Width="100" DisplayMemberBinding="{Binding Username}"/>
-                    <GridViewColumn Header="Password" Width="100" DisplayMemberBinding="{Binding Password}"/>
-                    <GridViewColumn Header="New Password" Width="100" DisplayMemberBinding="{Binding passExpires}"/>
+                    <GridViewColumn Header="Reset Password" Width="100" DisplayMemberBinding="{Binding passExpires}"/>
+                    <GridViewColumn Header="Need password" Width="100" DisplayMemberBinding="{Binding passExpired}"/>
                 </GridView>
             </ListView.View>
         </ListView>
+        <Button x:Name="Logout_Click" Content="Logout" HorizontalAlignment="Left" Margin="288,38,0,0" VerticalAlignment="Top" Width="75" Click="Logout_Click_Click"/>
+        <Button x:Name="Delete_button" Content="Delete" HorizontalAlignment="Left" Margin="398,65,0,0" VerticalAlignment="Top" Width="75" Click="Delete_button_Click"/>
+        <Button x:Name="Reset" Content="Reset Pass" HorizontalAlignment="Left" Margin="399,72,0,0" VerticalAlignment="Top" Width="75" Click="Reset_Click" Grid.Row="1"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.48,1.812" Height="19" Width="64"><Run Language="nb-no" Text="Username:"/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Margin="10,38,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.48,1.812" Height="19" Width="64"><Run Language="nb-no" Text="Password:"/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Margin="200,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.48,1.812" Height="19" Width="85" Grid.Row="1"><Run Language="nb-no" Text="New Password:"/></TextBlock>
+        <PasswordBox x:Name="reset_box" HorizontalAlignment="Left" Margin="288,71,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.8,-5.2" Height="23" Width="106" Grid.Row="1"/>
 
     </Grid>
 </UserControl>
