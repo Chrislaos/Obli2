@@ -77,15 +77,21 @@ namespace WpfApplication5
             refreshList();
             if (adminUser.Text.Length > 3 && adminPass.Password.Length > 3)
             {
-                _userCollection.Add(new User { Username = adminUser.Text, Password = adminPass.Password, passExpires = passwordExpires(), accountStatus = "Temporary" });
+                if (checkEqualUser() == -1)
+                {
+                    _userCollection.Add(new User { Username = adminUser.Text, Password = adminPass.Password, passExpires = passwordExpires(), accountStatus = "Temporary" });
+                }
+                else { MessageBox.Show("That username is already taken."); }
             }
             else { MessageBox.Show("Username and password need to be equal or more then 4 characters."); }
             adminUser.Text = null;
             adminPass.Password = null;
         }
-        public bool checkEqualUser(string x)
+        // Gives an index that is used to determine if that username is already in the collection
+        public int checkEqualUser()
         {
-            
+            var q = _userCollection.IndexOf(_userCollection.Where(a => a.Username == adminUser.Text).FirstOrDefault());
+            return q;
         }
         // Needed for the listview binding with collection to work.
         public ObservableCollection<User> userCollection
