@@ -4,15 +4,16 @@
         Title="MainWindow" Height="350" Width="525">
     <Grid x:Name="Panel1">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="488*"/>
-            <ColumnDefinition Width="29*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0*"/>
         </Grid.ColumnDefinitions>
-        <Button Content="Login" HorizontalAlignment="Left" Margin="247,10,0,0" VerticalAlignment="Top" Width="75" Click="buttonClick"/>
-        <TextBox x:Name="User" HorizontalAlignment="Left" Height="23" Margin="86,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="156" TextChanged="bruker_TextChanged" KeyDown="Enter_login"/>
-        <PasswordBox x:Name="Password" HorizontalAlignment="Left" Margin="86,39,0,0" VerticalAlignment="Top" Width="156" KeyDown="Enter_login"/>
+        <Button Content="Login" HorizontalAlignment="Left" Margin="247,10,0,0" VerticalAlignment="Top" Width="75" Click="buttonClick" Height="22"/>
+        <TextBox x:Name="User" HorizontalAlignment="Left" Height="23" Margin="86,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="156" KeyDown="Enter_login"/>
+        <PasswordBox x:Name="Password" HorizontalAlignment="Left" Margin="86,39,0,0" VerticalAlignment="Top" Width="156" KeyDown="Enter_login" Height="20"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="22" Width="76" FontSize="15"><Run Language="nb-no" Text="Username:"/></TextBlock>
         <TextBlock HorizontalAlignment="Left" Margin="10,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="22" Width="76" FontSize="15"><Run Language="nb-no" Text="Password:"/></TextBlock>
         <TextBlock x:Name="clockBox" HorizontalAlignment="Left" Margin="43,271,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="21" Width="124"/>
+        <Button x:Name="Exit_button" Content="Exit" HorizontalAlignment="Left" Margin="390,10,0,0" VerticalAlignment="Top" Width="75" Height="22" Click="Exit_button_Click"/>
     </Grid>
     
 </Window>

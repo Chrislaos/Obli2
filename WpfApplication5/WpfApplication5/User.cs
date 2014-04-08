@@ -11,6 +11,6 @@ namespace WpfApplication5
         public string Username { get; set; }
         public string Password { get; set; }
         public DateTime passExpires { get; set; }
-        public Boolean passExpired { get; set; }
+        public string accountStatus { get; set; }
     }
 }

@@ -30,24 +30,15 @@ namespace WpfApplication5
         public MainWindow()
         {
             InitializeComponent();
-            adminWin._userCollection.Add(new User { Username = "admin", Password = "fotball", passExpires = adminWin.passwordExpires() });
+            // Creates admin user with password expiring date 99 years head of time.
+            adminWin._userCollection.Add(new User { Username = "admin", Password = "fotball", passExpires = DateTime.Now.AddYears(99), accountStatus = "Veteran" });
         }
-        public void SwitchControls(Control removeCtrl, Control addControl)
-        {
-           
-        }
+        // Login Button
         private void buttonClick(object sender, RoutedEventArgs e)
         {
             logging_in();
         }
-
-
-
-        private void bruker_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            
-        }
-
+        // A event that runs login function after "enter" button, this is linked up with the two textboxes.
         private void Enter_login(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
@@ -55,6 +46,7 @@ namespace WpfApplication5
                 logging_in();
             }
         }
+        // Starts off checking for admin, then users. This function will open usercontrols or messageboxes.
         private void logging_in()
         {
 
@@ -66,30 +58,34 @@ namespace WpfApplication5
 
             }
             else if(checkUser()){
-                MessageBox.Show("YIPIKAYEY");
+                MessageBox.Show("ONLINE");
             }
             else
             {
-                MessageBox.Show("SHIT");
+                MessageBox.Show("Mismatch");
             }
             clearBoxes();
         }
+        // Emptying textboxes.
         private void clearBoxes(){
             User.Text = null;
             Password.Password = null;
         }
-
+        // Checking if user is part of the collection and returns a bool based on that. Also checks if the users password is "temporary" or "expired", and might open a new password window if needed.
         public bool checkUser()
         {
-            bool tempBool = false;
+            bool tempBool = false; int index = -1;
             foreach (User user in adminWin._userCollection)
             {
-
+                index++;
                 if (user.Username == User.Text)
                 {
                     if (user.Password == Password.Password) { 
                         tempBool = true;
-                        if (user.passExpired) { }
+                        if (user.accountStatus != "Valid") { 
+                            NewPasswordWin newPassword = new NewPasswordWin(Panel1, index);
+                            Panel1.Children.Add(newPassword);
+                        }
                         else
                         {
 
@@ -98,6 +94,11 @@ namespace WpfApplication5
                 }
             }
             return tempBool;
+        }
+        // Event for exiting the program.
+        private void Exit_button_Click(object sender, RoutedEventArgs e)
+        {
+            Environment.Exit(0);
         }
         
     }
